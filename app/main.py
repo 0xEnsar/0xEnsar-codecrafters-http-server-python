@@ -12,6 +12,13 @@ def main():
     data = conn.recv(1024).decode("utf-8")
     print("Received: ", data)
 
+    path = data.split()[1]
+    if path == "/":
+        server_socket.send(b"HTTP/1.1 200 OK\r\n\r\n")
+    
+    else:
+        server_socket.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
+
 
 
 if __name__ == "__main__":
