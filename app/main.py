@@ -14,10 +14,10 @@ def main():
 
     path = data.split()[1]
     if path == "/":
-        server_socket.send(b"HTTP/1.1 200 OK\r\n\r\n")
+        conn.send(b"HTTP/1.1 200 OK\r\n\r\n")
     
     else:
-        server_socket.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
+        conn.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
 
 
 
