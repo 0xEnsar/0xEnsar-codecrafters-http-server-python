@@ -9,6 +9,9 @@ def main():
 
     print("Connection from: ", addr)
 
+    data = conn.recv(1024).decode("utf-8")
+    print("Received: ", data)
+
 
 
 if __name__ == "__main__":
