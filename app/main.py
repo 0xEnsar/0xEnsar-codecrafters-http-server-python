@@ -18,7 +18,7 @@ def main():
         conn.send(response.encode())
     
     elif path.startswith("/echo"):
-        echoPath = path[:6]
+        echoPath = path[6:]
         print("Echo path: ", echoPath)
         response = (f"HTTP/1.1 200 OK\r\n\Content-Type: text/plain\r\nContent-Length: {len(echoPath)}\r\n\r\n{echoPath}")
         conn.send(response.encode())
