@@ -14,13 +14,17 @@ def main():
 
     path = data.split()[1]
     if path == "/":
-        conn.send(b"HTTP/1.1 200 OK\r\n\r\n")
+        response = "HTTP/1.1 200 OK\r\n\r\n"
+        conn.send(response.encode())
     
     elif path.startswith("/echo"):
-        print("Echoing back: ", path)
+        echoPath = path[:6]
+        response = (f"HTTP/1.1 200 OK\r\n\Content-Type: text/plain\r\nContent-Length: {len(echoPath)}\r\n\r\n{echoPath}")
+        conn.send(response.encode())
     
     else:
-        conn.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
+        response = "HTTP/1.1 404 Not Found\r\n\r\n"
+        conn.send(response.encode())
 
 
 
