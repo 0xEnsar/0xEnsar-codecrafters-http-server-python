@@ -16,6 +16,9 @@ def main():
     if path == "/":
         conn.send(b"HTTP/1.1 200 OK\r\n\r\n")
     
+    elif path.startswith("/echo"):
+        print("Echoing back: ", path)
+    
     else:
         conn.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
 
