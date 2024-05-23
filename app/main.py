@@ -28,6 +28,7 @@ def main():
         userAgentPath = data.split("User-Agent: ")[1]
         print("User-Agent path: ", userAgentPath)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(userAgentPath)}\r\n\r\n{userAgentPath}\r\n"
+        conn.send(response.encode())
     else:
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
         conn.send(response.encode())
