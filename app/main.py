@@ -10,9 +10,9 @@ def main():
     print("Connection from: ", addr)
 
     data = conn.recv(1024).decode("utf-8")
-    print("Received: ", data)
 
     path = data.split()[1]
+    print("Path: ", path)
     if path == "/":
         response = "HTTP/1.1 200 OK\r\n\r\n"
         conn.send(response.encode())
@@ -22,6 +22,7 @@ def main():
         print("Echo path: ", echoPath)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echoPath)}\r\n\r\n{echoPath}\r\n"
         conn.send(response.encode())
+
     
     else:
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
