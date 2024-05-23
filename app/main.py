@@ -24,7 +24,7 @@ def main():
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echoPath)}\r\n\r\n{echoPath}\r\n"
         conn.send(response.encode())
 
-    elif path.startswith("/user-agent"):
+    # elif path.startswith("/user-agent"):
 
 
     
