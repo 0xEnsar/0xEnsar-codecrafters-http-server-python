@@ -10,6 +10,7 @@ def main():
     print("Connection from: ", addr)
 
     data = conn.recv(1024).decode("utf-8")
+    print("Data: ", data)
 
     path = data.split()[1]
     print("Path: ", path)
@@ -22,6 +23,9 @@ def main():
         print("Echo path: ", echoPath)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echoPath)}\r\n\r\n{echoPath}\r\n"
         conn.send(response.encode())
+
+    elif path.startswith("/user-agent"):
+
 
     
     else:
