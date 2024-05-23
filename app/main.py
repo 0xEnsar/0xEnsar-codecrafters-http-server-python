@@ -25,7 +25,7 @@ def main():
         conn.send(response.encode())
 
     elif path.startswith("/user-agent"):
-        userAgentPath = data.split("User-Agent: ")[1]
+        userAgentPath = data.split("User-Agent: ")[1].split("\r\n")[0]
         print("User-Agent path: ", userAgentPath)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(userAgentPath)}\r\n\r\n{userAgentPath}\r\n"
         conn.send(response.encode())
