@@ -24,10 +24,10 @@ def main():
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echoPath)}\r\n\r\n{echoPath}\r\n"
         conn.send(response.encode())
 
-    # elif path.startswith("/user-agent"):
-
-
-    
+    elif path.startswith("/user-agent"):
+        userAgentPath = path[12:]
+        print("User-Agent path: ", userAgentPath)
+        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(userAgentPath)}\r\n\r\n{userAgentPath}\r\n"
     else:
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
         conn.send(response.encode())
