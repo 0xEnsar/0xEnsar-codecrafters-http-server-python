@@ -13,7 +13,8 @@ def main():
     print("Data: ", data)
 
     path = data.split()[1]
-    print("Path: ", path)
+    # print("Path: ", path)
+    print("data.split(): ", data.split())
     if path == "/":
         response = "HTTP/1.1 200 OK\r\n\r\n"
         conn.send(response.encode())
