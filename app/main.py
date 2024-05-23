@@ -13,8 +13,7 @@ def main():
     print("Data: ", data)
 
     path = data.split()[1]
-    # print("Path: ", path)
-    print("data.split(): ", data.split())
+    
     if path == "/":
         response = "HTTP/1.1 200 OK\r\n\r\n"
         conn.send(response.encode())
@@ -26,7 +25,7 @@ def main():
         conn.send(response.encode())
 
     elif path.startswith("/user-agent"):
-        userAgentPath = path[12:]
+        userAgentPath = data.split("User-Agent: ")[1]
         print("User-Agent path: ", userAgentPath)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(userAgentPath)}\r\n\r\n{userAgentPath}\r\n"
     else:
