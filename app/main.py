@@ -3,7 +3,6 @@ import threading
 import sys
 
 def connectionHandler(conn, addr):
-    print("sys argv: ", sys.argv[2])
     print("Connection from: ", addr)
 
     data = conn.recv(1024).decode("utf-8")
@@ -28,7 +27,9 @@ def connectionHandler(conn, addr):
         conn.send(response.encode())
 
     elif path.startswith("/files"):
-        file_path = path[7:]
+        file_name = path[7:]
+        direactory = sys.argv[2]
+        file_path = f"{direactory}/{file_name}"
         print("File path: ", file_path)
         try:
             with open(file_path, "r") as file:
