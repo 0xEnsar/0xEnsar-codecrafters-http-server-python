@@ -3,7 +3,7 @@ import threading
 import sys
 
 def connectionHandler(conn, addr):
-    print("sys argv: ", sys.argv)
+    print("sys argv: ", sys.argv[2])
     print("Connection from: ", addr)
 
     data = conn.recv(1024).decode("utf-8")
