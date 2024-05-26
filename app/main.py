@@ -34,7 +34,7 @@ def connectionHandler(conn, addr):
         try:
             with open(file_path, "r") as file:
                 content = file.read()
-                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(content)}\r\n\r\n{content}\r\n"
+                response = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(content)}\r\n\r\n{content}\r\n"
                 conn.send(response.encode())
         except FileNotFoundError:
             response = "HTTP/1.1 404 Not Found\r\n\r\n"
