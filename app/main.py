@@ -24,6 +24,18 @@ def connectionHandler(conn, addr):
         print("User-Agent path: ", user_agent_path)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent_path)}\r\n\r\n{user_agent_path}\r\n"
         conn.send(response.encode())
+
+    elif path.startswith("/files"):
+        file_path = path[7:]
+        print("File path: ", file_path)
+        try:
+            with open(file_path, "r") as file:
+                content = file.read()
+                response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(content)}\r\n\r\n{content}\r\n"
+                conn.send(response.encode())
+        except FileNotFoundError:
+            response = "HTTP/1.1 404 Not Found\r\n\r\n"
+            conn.send(response.encode())
     else:
         response = "HTTP/1.1 404 Not Found\r\n\r\n"
         conn.send(response.encode())
