@@ -17,7 +17,10 @@ def connectionHandler(conn, addr):
     elif path.startswith("/echo"):
         echo_path = path[6:]
         print("Echo path: ", echo_path)
-        encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
+        try:
+            encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
+        except IndexError:
+            encoding = ""
         if "gzip" in encoding:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
         else:
