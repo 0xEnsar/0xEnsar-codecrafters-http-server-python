@@ -24,10 +24,11 @@ def connectionHandler(conn, addr):
         except IndexError:
             encoding = ""
         if "gzip" in encoding:
-            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(encoded_path)}\r\n\r\n{encoded_path}\r\n"
+            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(echo_path)}\r\n\r\n".encode() + encoded_path + "\r\n".encode()
         else:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
-        conn.send(response.encode())
+            response = response.encode()
+        conn.send(response)
 
     elif path.startswith("/user-agent"):
         user_agent_path = data.split("User-Agent: ")[1].split("\r\n")[0]
