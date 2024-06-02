@@ -20,7 +20,7 @@ def connectionHandler(conn, addr):
         print("Echo path: ", echo_path)
         try:
             encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
-            encoded_path = gzip.compress(echo_path.encode('utf-8'))
+            encoded_path = gzip.compress(echo_path.encode())
         except IndexError:
             encoding = ""
         if "gzip" in encoding:
