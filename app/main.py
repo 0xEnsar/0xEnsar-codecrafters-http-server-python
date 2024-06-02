@@ -1,6 +1,7 @@
 import socket
 import threading
 import sys
+import gzip
 
 def connectionHandler(conn, addr):
     print("Connection from: ", addr)
@@ -19,10 +20,11 @@ def connectionHandler(conn, addr):
         print("Echo path: ", echo_path)
         try:
             encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
+            encoded_path = gzip.compress(echo_path)
         except IndexError:
             encoding = ""
         if "gzip" in encoding:
-            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
+            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(echo_path)}\r\n\r\n{encoded_path}\r\n"
         else:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
         conn.send(response.encode())
