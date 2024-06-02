@@ -18,8 +18,11 @@ def connectionHandler(conn, addr):
         echo_path = path[6:]
         print("Echo path: ", echo_path)
         encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
-        print("Encoding: ", encoding)
-        response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
+        if "gzip" in encoding:
+            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
+        else:
+            response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
+        print("Response: ", response)
         conn.send(response.encode())
 
     elif path.startswith("/user-agent"):
