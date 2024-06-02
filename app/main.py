@@ -25,7 +25,6 @@ def connectionHandler(conn, addr):
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Encoding: gzip\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
         else:
             response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
-        print("Response: ", response)
         conn.send(response.encode())
 
     elif path.startswith("/user-agent"):
