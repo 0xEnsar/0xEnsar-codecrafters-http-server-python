@@ -17,6 +17,8 @@ def connectionHandler(conn, addr):
     elif path.startswith("/echo"):
         echo_path = path[6:]
         print("Echo path: ", echo_path)
+        encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
+        print("Encoding: ", encoding)
         response = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(echo_path)}\r\n\r\n{echo_path}\r\n"
         conn.send(response.encode())
 
