@@ -49,7 +49,7 @@ def connectionHandler(conn, addr):
             with open(file_path, "w") as file:
                 content = data.split("\r\n\r\n")[1]
                 file.write(content)
-                response = "HTTP/1.1 201 OK\r\n\r\n"
+                response = "HTTP/1.1 201 Created\r\n\r\n"
                 conn.send(response.encode())
         except FileNotFoundError:
             response = "HTTP/1.1 404 Not Found\r\n\r\n"
