@@ -21,6 +21,7 @@ def connectionHandler(conn, addr):
         try:
             encoding = data.split("Accept-Encoding: ")[1].split("\r\n")[0]
             encoded_path = gzip.compress(echo_path.encode())
+            print("Encoded path: ", encoded_path)
         except IndexError:
             encoding = ""
         if "gzip" in encoding:
